@@ -1,22 +1,22 @@
 import React from "react";
 import { useEffect, useState } from "react";
 
-function EventsPage() {
+export const EventsPage = () => {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/events");
+        const data = await response.json();
+        setEvents(data.events);
+      } catch (error) {
+        console.error("Error fetching events:", error);
+      }
+    };
+
     fetchEvents();
   }, []);
-
-  const fetchEvents = async () => {
-    try {
-      const response = await fetch("http://localhost:3000/events");
-      const data = await response.json();
-      setEvents(data);
-    } catch (error) {
-      console.error("Error fetching events:", error);
-    }
-  };
 
   return (
     <div>
@@ -33,6 +33,6 @@ function EventsPage() {
       ))}
     </div>
   );
-}
+};
 
 export default EventsPage;
