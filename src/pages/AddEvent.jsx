@@ -15,6 +15,7 @@ import {
   ModalBody,
   useToast,
   Center,
+  Divider,
 } from "@chakra-ui/react";
 
 export const AddEvent = () => {
@@ -67,25 +68,29 @@ export const AddEvent = () => {
   return (
     <Box p={"6"}>
       <Center>
-        <Heading as="h1" size="xl" mb="6">
-          Add Your Event
+        <Heading
+          color={"gray.700"}
+          fontSize={"2rem"}
+          fontWeight={"bold"}
+          my={3}
+        >
+          Add your event to the calendar
         </Heading>
       </Center>
       <Center>
         <Button
           onClick={onOpen}
-          mb="4"
+          my={4}
           color="white"
-          backgroundColor={"limegreen"}
+          backgroundColor={"green.400"}
           _hover={{
-            color: "white.100",
-            bgGradient:
-              "linear(to-r, rgba(12, 1, 44, 0.2), rgba(26, 32, 24, 0.7))",
+            bgColor: "green",
           }}
         >
           Add Event
         </Button>
       </Center>
+      <Divider my={8}></Divider>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

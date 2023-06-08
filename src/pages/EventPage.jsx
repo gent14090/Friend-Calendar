@@ -18,13 +18,13 @@ import {
   FormControl,
   FormLabel,
   Input,
-  Divider,
   useToast,
   useDisclosure,
+  Divider,
 } from "@chakra-ui/react";
 
 import { useLoaderData, useNavigate } from "react-router-dom";
-import { InfoOutlineIcon } from "@chakra-ui/icons";
+import { CalendarIcon } from "@chakra-ui/icons";
 
 export const loader = async ({ params }) => {
   const users = await fetch("http://localhost:3000/users");
@@ -85,7 +85,7 @@ export const EventPage = () => {
       .catch((error) => {
         console.error("Error:", error);
         toast({
-          title: "Error Event Not Edited. Try Again.",
+          title: "Something went wrong. Please try again.",
           status: "error",
           duration: 3000,
           position: "top-right",
@@ -101,7 +101,7 @@ export const EventPage = () => {
 
   const handleDeleteClick = () => {
     if (window.confirm("Do you want to delete this event?")) {
-      window.confirm("Are you 100% Sure? ");
+      window.confirm("Are you sure?");
       fetch(`http://localhost:3000/events/${event.id}`, {
         method: "DELETE",
       })
@@ -118,7 +118,7 @@ export const EventPage = () => {
         .catch((error) => {
           console.error("Error:", error);
           toast({
-            title: "Error Event Not Deleted. Try Again.",
+            title: "Something went wrong. Please try again.",
             status: "error",
             duration: 3000,
             position: "top-right",
@@ -129,55 +129,53 @@ export const EventPage = () => {
   };
 
   return (
-    <Box
-      p={"6"}
-      minHeight={"100vh"}
-      maxWidth={{ base: "100%", md: "680px" }}
-      mx="auto"
-    >
-      <Heading as="h1" size="xl" mb="6">
-        Event
-      </Heading>
-      <Box>
-        <Image src={event.image} mb="4" borderRadius="md" />
-        <Heading as="h2" size="md">
-          {event.title}
-        </Heading>
-        <Text color="gray.500" fontSize="sm" mb="3" mt="1">
-          Location: {event.location}
-        </Text>
-        <Text>{event.description}</Text>
-        <Text color="gray.500" fontSize="sm" mt="3">
-          Starts at: {new Date(event.startTime).toLocaleString()}
-        </Text>
-        <Text color="gray.500" fontSize="sm" mt="1">
-          End at: {new Date(event.endTime).toLocaleString()}
-        </Text>
-        <Image
-          src={users.find((user) => user.id === event.createdBy)?.image}
-          borderRadius={"50px"}
-          height={"100px"}
-          mt={3}
-          _hover={{ height: "200px", borderRadius: "100px" }}
-        />
-        <Text
-          color="gray.500"
-          fontSize="sm"
-          mt="1"
-          _hover={{ color: "blue.300" }}
+    <Center>
+      <Box
+        maxW={1200}
+        width={"100%"}
+        display={"flex"}
+        justifyContent={"center"}
+        my={"6"}
+      >
+        <Box
+          width={"80%"}
+          background={"white"}
+          borderRadius={20}
+          boxShadow={"md"}
         >
-          Created By: &nbsp;
-          {users.find((user) => user.id === event.createdBy)?.name}
-        </Text>
-        <Flex gap={2} color="gray.500" fontSize="sm" mt="3">
-          Category:
-          <Flex gap={2}>
+          {/* Afbeelding */}
+          <Image
+            src={event.image}
+            objectFit={"cover"}
+            width={"100%"}
+            height={350}
+            borderTopRadius={"20px"}
+          />
+
+          {/* Event naam */}
+          <Heading
+            fontSize={"2rem"}
+            color={"gray.700"}
+            mt={"6"}
+            mb={"2"}
+            ml={"4"}
+          >
+            {event.title}
+          </Heading>
+
+          {/* Categorie */}
+          <Flex gap={2} my={"2"} ml={"4"}>
             {categories
               .filter((category) => event.categoryIds.includes(category.id))
               .map((category) => (
                 <Box key={category.id}>
-                  <Tag color="white" fontSize="sm" bg="blue.400">
-                    <TagLeftIcon as={InfoOutlineIcon} />
+                  <Tag
+                    color="white"
+                    bgColor={"blue.400"}
+                    fontSize="0.8rem"
+                    fontWeight={"bold"}
+                  >
+                    <TagLeftIcon as={CalendarIcon} />
                     <Text textTransform={"uppercase"} fontSize={"10"}>
                       {category.name}
                     </Text>
@@ -185,114 +183,148 @@ export const EventPage = () => {
                 </Box>
               ))}
           </Flex>
-        </Flex>
-        <br />
-        <Divider />
-        <br />
-        <Center>
-          <Flex gap={3}>
+
+          <Divider my={"5"}></Divider>
+
+          {/* Locatie */}
+          <Text color={"gray.700"} fontSize={"1rem"} my={"2"} mx={"4"}>
+            📍{event.location}
+          </Text>
+
+          {/* Begintijd en eindtijd */}
+          <Text color={"gray.700"} fontSize={"1rem"} my={"2"} mx={"4"}>
+            🗓️ {new Date(event.startTime).toLocaleString()} {"– "}
+            {new Date(event.endTime).toLocaleString()}
+          </Text>
+
+          {/* Omschrijving */}
+          <Text color={"gray.500"} fontSize={"1rem"} my={"2"} mx={"4"}>
+            {event.description}
+          </Text>
+
+          {/* Profielfoto */}
+          <Image
+            src={users.find((user) => user.id === event.createdBy)?.image}
+            borderRadius={"50px"}
+            height={"50px"}
+            mt={"6"}
+            mx={"4"}
+          />
+
+          {/* Auteur */}
+          <Text color="gray.500" fontSize="0.8rem" mt="1" mx={"4"}>
+            Organizer: {users.find((user) => user.id === event.createdBy)?.name}
+          </Text>
+
+          <Divider my={"5"}></Divider>
+
+          {/* Knop edit event */}
+          <Flex gap={3} mt={"10"} mb={"6"} mx={"4"}>
             <Button
               color={"white"}
-              backgroundColor={"teal.300"}
+              backgroundColor={"green.400"}
               onClick={() => setIsEditModalOpen(true)}
-              _hover={{ bg: "limegreen" }}
+              _hover={{ bg: "green" }}
             >
               Edit Event
             </Button>
+            {/* Knop delete event */}
             <Button
               color="white"
-              backgroundColor={"red"}
+              backgroundColor={"red.500"}
               onClick={handleDeleteClick}
-              _hover={{ color: "black" }}
+              _hover={{ bg: "red" }}
             >
               Delete Event
             </Button>
           </Flex>
-        </Center>
-        <Modal
-          isOpen={isEditModalOpen}
-          onClose={() => setIsEditModalOpen(false)}
-        >
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Edit Event</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              <form onSubmit={handleEditSubmit}>
-                <FormControl mb="4">
-                  <FormLabel>Title</FormLabel>
-                  <Input
-                    type="text"
-                    name="title"
-                    value={updatedEvent.title}
-                    onChange={handleInputChange}
-                  />
-                </FormControl>
-                <FormControl mb="4">
-                  <FormLabel>Description</FormLabel>
-                  <Input
-                    type="text"
-                    name="description"
-                    value={updatedEvent.description}
-                    onChange={handleInputChange}
-                  />
-                </FormControl>
-                <FormControl mb="4">
-                  <FormLabel>Location</FormLabel>
-                  <Input
-                    type="text"
-                    name="location"
-                    value={updatedEvent.location}
-                    onChange={handleInputChange}
-                  />
-                </FormControl>
-                <FormControl mb="4">
-                  <FormLabel>Start Time</FormLabel>
-                  <Input
-                    type="datetime-local"
-                    name="startTime"
-                    value={updatedEvent.startTime}
-                    onChange={handleInputChange}
-                  />
-                </FormControl>
-                <FormControl mb="4">
-                  <FormLabel>End Time</FormLabel>
-                  <Input
-                    type="datetime-local"
-                    name="endTime"
-                    value={updatedEvent.endTime}
-                    onChange={handleInputChange}
-                  />
-                </FormControl>
-                <FormControl mb="4">
-                  <FormLabel>Category</FormLabel>
-                  <select
-                    name="categoryIds"
-                    multiple
-                    value={updatedEvent.categoryIds}
-                    onChange={handleInputChange}
+
+          {/* Event bewerken */}
+          <Modal
+            isOpen={isEditModalOpen}
+            onClose={() => setIsEditModalOpen(false)}
+          >
+            <ModalOverlay />
+            <ModalContent>
+              <ModalHeader>Edit Event</ModalHeader>
+              <ModalCloseButton />
+              <ModalBody>
+                <form onSubmit={handleEditSubmit}>
+                  <FormControl mb="4">
+                    <FormLabel>Title</FormLabel>
+                    <Input
+                      type="text"
+                      name="title"
+                      value={updatedEvent.title}
+                      onChange={handleInputChange}
+                    />
+                  </FormControl>
+                  <FormControl mb="4">
+                    <FormLabel>Description</FormLabel>
+                    <Input
+                      type="textarea"
+                      name="description"
+                      value={updatedEvent.description}
+                      onChange={handleInputChange}
+                    />
+                  </FormControl>
+                  <FormControl mb="4">
+                    <FormLabel>Location</FormLabel>
+                    <Input
+                      type="text"
+                      name="location"
+                      value={updatedEvent.location}
+                      onChange={handleInputChange}
+                    />
+                  </FormControl>
+                  <FormControl mb="4">
+                    <FormLabel>Start Time</FormLabel>
+                    <Input
+                      type="datetime-local"
+                      name="startTime"
+                      value={updatedEvent.startTime}
+                      onChange={handleInputChange}
+                    />
+                  </FormControl>
+                  <FormControl mb="4">
+                    <FormLabel>End Time</FormLabel>
+                    <Input
+                      type="datetime-local"
+                      name="endTime"
+                      value={updatedEvent.endTime}
+                      onChange={handleInputChange}
+                    />
+                  </FormControl>
+                  <FormControl mb="4">
+                    <FormLabel>Category</FormLabel>
+                    <select
+                      name="categoryIds"
+                      multiple
+                      value={updatedEvent.categoryIds}
+                      onChange={handleInputChange}
+                    >
+                      {categories.map((category) => (
+                        <option key={category.id} value={category.id}>
+                          {category.name}
+                        </option>
+                      ))}
+                    </select>
+                  </FormControl>
+                  <Button
+                    type="submit"
+                    bgColor={"green.300"}
+                    color={"white"}
+                    _hover={{ bg: "green" }}
                   >
-                    {categories.map((category) => (
-                      <option key={category.id} value={category.id}>
-                        {category.name}
-                      </option>
-                    ))}
-                  </select>
-                </FormControl>
-                <Button
-                  type="submit"
-                  backgroundColor={"teal.300"}
-                  color={"white"}
-                  _hover={{ bg: "limegreen" }}
-                >
-                  Save
-                </Button>
-              </form>
-            </ModalBody>
-          </ModalContent>
-        </Modal>
+                    Save
+                  </Button>
+                </form>
+              </ModalBody>
+            </ModalContent>
+          </Modal>
+        </Box>
       </Box>
-    </Box>
+    </Center>
   );
 };
 
