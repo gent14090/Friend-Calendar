@@ -19,10 +19,11 @@ import {
   useDisclosure,
   Divider,
 } from "@chakra-ui/react";
+import { ArrowBackIcon } from "@chakra-ui/icons";
 
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { CalendarIcon } from "@chakra-ui/icons";
-import EditEventForm from "./EditEvent";
+import EditEventForm from "../components/EditEvent";
 
 export const loader = async ({ params }) => {
   const users = await fetch("http://localhost:3000/users");
@@ -141,21 +142,34 @@ export const EventPage = () => {
     }
   };
 
+  const handleGoBack = () => {
+    navigate("/");
+  };
+
   return (
-    <Center>
+    <Center backgroundColor={"gray.50"}>
       <Box
         maxW={1200}
-        width={"100%"}
+        width={"60%"}
         display={"flex"}
-        justifyContent={"center"}
+        flexDirection={"column"}
         my={"6"}
       >
-        <Box
-          width={"80%"}
-          background={"white"}
-          borderRadius={20}
-          boxShadow={"md"}
+        {/* Go Back knop */}
+        <Button
+          leftIcon={<ArrowBackIcon />}
+          color={"gray.500"}
+          backgroundColor={"transparent"}
+          fontWeight={"regular"}
+          fontSize={"0.8rem"}
+          onClick={handleGoBack}
+          _hover={{ color: "blue.500" }}
+          justifyContent={"left"}
         >
+          GO BACK
+        </Button>
+
+        <Box background={"white"} borderRadius={20} boxShadow={"md"}>
           {/* Afbeelding */}
           <Image
             src={event.image}

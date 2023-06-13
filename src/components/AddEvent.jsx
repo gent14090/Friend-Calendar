@@ -184,7 +184,7 @@ export const AddEvent = () => {
                 />
               </FormControl>
               <FormControl mt={4}>
-                <FormLabel>Categories</FormLabel>
+                <FormLabel>Event type</FormLabel>
                 {categories.map((category) => (
                   <Checkbox
                     key={category.id}

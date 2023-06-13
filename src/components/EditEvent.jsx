@@ -18,7 +18,7 @@ const EditEventForm = ({
   return (
     <form onSubmit={handleSubmit}>
       <FormControl id="title" isRequired>
-        <FormLabel>Title</FormLabel>
+        <FormLabel>Event name</FormLabel>
         <Input
           type="text"
           name="title"
@@ -47,7 +47,7 @@ const EditEventForm = ({
       </FormControl>
 
       <FormControl id="startTime" isRequired mt={4}>
-        <FormLabel>Start Time</FormLabel>
+        <FormLabel>Starts at:</FormLabel>
         <Input
           type="datetime-local"
           name="startTime"
@@ -57,7 +57,7 @@ const EditEventForm = ({
       </FormControl>
 
       <FormControl id="endTime" mt={4}>
-        <FormLabel>End Time</FormLabel>
+        <FormLabel>Ends at:</FormLabel>
         <Input
           type="datetime-local"
           name="endTime"
@@ -67,7 +67,7 @@ const EditEventForm = ({
       </FormControl>
 
       <FormControl id="categoryIds" mt={4}>
-        <FormLabel>Categories</FormLabel>
+        <FormLabel>Event type</FormLabel>
         {categories.map((category) => (
           <Checkbox
             key={category.id}
@@ -80,7 +80,7 @@ const EditEventForm = ({
         ))}
       </FormControl>
 
-      <Button type="submit" colorScheme="teal" mt={4}>
+      <Button type="submit" colorScheme="green" my={4}>
         Save
       </Button>
     </form>

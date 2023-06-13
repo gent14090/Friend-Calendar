@@ -4,7 +4,7 @@ import { Box, Flex, List, Text } from "@chakra-ui/react";
 
 export const Navigation = () => {
   return (
-    <Box style={{ position: "sticky", top: 0, zIndex: 1 }} bgColor="blue.600">
+    <Box style={{ position: "sticky", top: 0, zIndex: 1 }} bgColor="blue.500">
       <Flex justify="center" padding="4">
         <List>
           <Link to="/">

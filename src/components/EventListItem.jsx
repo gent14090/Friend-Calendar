@@ -17,7 +17,7 @@ const EventListItem = ({ event, categories }) => {
     <Box maxW={1600} display={"inline-flex"}>
       <Box
         key={event.id}
-        width={400}
+        width={420}
         background={"white"}
         borderRadius={20}
         boxShadow={"md"}

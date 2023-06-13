@@ -10,7 +10,7 @@ import {
   Divider,
 } from "@chakra-ui/react";
 import { useLoaderData } from "react-router-dom";
-import { AddEvent } from "./AddEvent";
+import { AddEvent } from "../components/AddEvent";
 import EventListItem from "../components/EventListItem";
 
 const loader = async () => {
