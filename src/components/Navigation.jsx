@@ -12,11 +12,16 @@ export const Navigation = () => {
               color={"white"}
               fontSize="3rem"
               fontWeight={"bold"}
+              align={"center"}
               _hover={{ transform: "scale(1.05)" }}
             >
-              Winc Events
+              Friend Calendar
             </Text>
           </Link>
+          <Text color={"white"} fontSize="1.2rem" align={"center"}>
+            Add your party, gathering or event in this calendar and share it
+            with your friends.
+          </Text>
         </List>
       </Flex>
     </Box>

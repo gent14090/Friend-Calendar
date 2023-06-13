@@ -16,6 +16,7 @@ import {
   useToast,
   Center,
   Divider,
+  Checkbox,
 } from "@chakra-ui/react";
 
 export const AddEvent = () => {
@@ -29,21 +30,45 @@ export const AddEvent = () => {
   const [categoryIds, setCategoryIds] = useState([]);
   const toast = useToast();
 
+  const categories = [
+    {
+      name: "Food",
+      id: 1,
+    },
+    {
+      name: "Sport",
+      id: 2,
+    },
+    {
+      name: "Party",
+      id: 3,
+    },
+    {
+      name: "Other",
+      id: 4,
+    },
+  ];
+
   const handleSubmit = (event) => {
     event.preventDefault();
+    const selectedCategories = categories.filter((category) =>
+      categoryIds.includes(category.id)
+    );
+    const attendedBy = [];
     fetch("http://localhost:3000/events", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        image,
         title,
         description,
+        image,
+        categoryIds: selectedCategories.map((category) => category.id),
+        attendedBy,
         location,
         startTime,
         endTime,
-        categoryIds,
       }),
     })
       .then((response) => response.json())
@@ -51,7 +76,7 @@ export const AddEvent = () => {
       .catch((error) => console.log(error));
 
     toast({
-      title: "Event Added Succesfully.",
+      title: "Event Added Successfully.",
       status: "success",
       duration: 3000,
       position: "top-right",
@@ -63,6 +88,15 @@ export const AddEvent = () => {
     });
     onClose();
     reset();
+  };
+
+  const handleCheckboxChange = (event) => {
+    const { value, checked } = event.target;
+    if (checked) {
+      setCategoryIds((prevIds) => [...prevIds, Number(value)]);
+    } else {
+      setCategoryIds((prevIds) => prevIds.filter((id) => id !== Number(value)));
+    }
   };
 
   return (
@@ -150,17 +184,17 @@ export const AddEvent = () => {
                 />
               </FormControl>
               <FormControl mt={4}>
-                <FormLabel>Category</FormLabel>
-                <Input
-                  type="text"
-                  placeholder="Category ID"
-                  value={categoryIds}
-                  onChange={(event) =>
-                    setCategoryIds(
-                      event.target.value.split(",").map((id) => id.trim())
-                    )
-                  }
-                />
+                <FormLabel>Categories</FormLabel>
+                {categories.map((category) => (
+                  <Checkbox
+                    key={category.id}
+                    value={category.id}
+                    isChecked={categoryIds.includes(category.id)}
+                    onChange={handleCheckboxChange}
+                  >
+                    {category.name}
+                  </Checkbox>
+                ))}
               </FormControl>
               <Button
                 variant="outline"

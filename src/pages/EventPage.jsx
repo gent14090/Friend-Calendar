@@ -15,9 +15,6 @@ import {
   ModalHeader,
   ModalBody,
   ModalCloseButton,
-  FormControl,
-  FormLabel,
-  Input,
   useToast,
   useDisclosure,
   Divider,
@@ -25,6 +22,7 @@ import {
 
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { CalendarIcon } from "@chakra-ui/icons";
+import EditEventForm from "./EditEvent";
 
 export const loader = async ({ params }) => {
   const users = await fetch("http://localhost:3000/users");
@@ -56,6 +54,21 @@ export const EventPage = () => {
       ...prevState,
       [name]: value,
     }));
+  };
+
+  const handleCheckboxChange = (event) => {
+    const { value, checked } = event.target;
+    if (checked) {
+      setUpdatedEvent((prevState) => ({
+        ...prevState,
+        categoryIds: [...prevState.categoryIds, Number(value)],
+      }));
+    } else {
+      setUpdatedEvent((prevState) => ({
+        ...prevState,
+        categoryIds: prevState.categoryIds.filter((id) => id !== Number(value)),
+      }));
+    }
   };
 
   const handleEditSubmit = (event) => {
@@ -230,8 +243,8 @@ export const EventPage = () => {
             </Button>
             {/* Knop delete event */}
             <Button
-              color="white"
-              backgroundColor={"red.500"}
+              color={"white"}
+              backgroundColor={"red.400"}
               onClick={handleDeleteClick}
               _hover={{ bg: "red" }}
             >
@@ -239,7 +252,7 @@ export const EventPage = () => {
             </Button>
           </Flex>
 
-          {/* Event bewerken */}
+          {/* Edit event modal */}
           <Modal
             isOpen={isEditModalOpen}
             onClose={() => setIsEditModalOpen(false)}
@@ -249,76 +262,13 @@ export const EventPage = () => {
               <ModalHeader>Edit Event</ModalHeader>
               <ModalCloseButton />
               <ModalBody>
-                <form onSubmit={handleEditSubmit}>
-                  <FormControl mb="4">
-                    <FormLabel>Title</FormLabel>
-                    <Input
-                      type="text"
-                      name="title"
-                      value={updatedEvent.title}
-                      onChange={handleInputChange}
-                    />
-                  </FormControl>
-                  <FormControl mb="4">
-                    <FormLabel>Description</FormLabel>
-                    <Input
-                      type="textarea"
-                      name="description"
-                      value={updatedEvent.description}
-                      onChange={handleInputChange}
-                    />
-                  </FormControl>
-                  <FormControl mb="4">
-                    <FormLabel>Location</FormLabel>
-                    <Input
-                      type="text"
-                      name="location"
-                      value={updatedEvent.location}
-                      onChange={handleInputChange}
-                    />
-                  </FormControl>
-                  <FormControl mb="4">
-                    <FormLabel>Start Time</FormLabel>
-                    <Input
-                      type="datetime-local"
-                      name="startTime"
-                      value={updatedEvent.startTime}
-                      onChange={handleInputChange}
-                    />
-                  </FormControl>
-                  <FormControl mb="4">
-                    <FormLabel>End Time</FormLabel>
-                    <Input
-                      type="datetime-local"
-                      name="endTime"
-                      value={updatedEvent.endTime}
-                      onChange={handleInputChange}
-                    />
-                  </FormControl>
-                  <FormControl mb="4">
-                    <FormLabel>Category</FormLabel>
-                    <select
-                      name="categoryIds"
-                      multiple
-                      value={updatedEvent.categoryIds}
-                      onChange={handleInputChange}
-                    >
-                      {categories.map((category) => (
-                        <option key={category.id} value={category.id}>
-                          {category.name}
-                        </option>
-                      ))}
-                    </select>
-                  </FormControl>
-                  <Button
-                    type="submit"
-                    bgColor={"green.300"}
-                    color={"white"}
-                    _hover={{ bg: "green" }}
-                  >
-                    Save
-                  </Button>
-                </form>
+                <EditEventForm
+                  event={updatedEvent}
+                  categories={categories}
+                  handleInputChange={handleInputChange}
+                  handleCheckboxChange={handleCheckboxChange}
+                  handleSubmit={handleEditSubmit}
+                />
               </ModalBody>
             </ModalContent>
           </Modal>

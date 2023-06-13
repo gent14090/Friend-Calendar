@@ -32,7 +32,7 @@
       "id": 2,
       "createdBy": 1,
       "title": "Laser Tag mania",
-      "description": "Let's play laser tag!",
+      "description": "Let's play laser tag! Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       "image": "https://www.ctvnews.ca/polopoly_fs/1.5118552.1600965663!/httpImage/image.jpg_gen/derivatives/landscape_1020/image.jpg",
       "categoryIds": [
         2
@@ -41,14 +41,14 @@
         2
       ],
       "location": "Blinded by the Lights Laser Tag, 15 Main St.",
-      "startTime": "2023-04-06T18:46",
-      "endTime": "2023-04-06T17:46"
+      "startTime": "2023-07-24T20:30",
+      "endTime": "2023-07-24T22:00"
     },
     {
       "id": 3,
       "createdBy": 2,
       "title": "Badminton game",
-      "description": "Hit that shuttle!",
+      "description": "Hit that shuttle! Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.",
       "image": "https://s3.eu-west-2.amazonaws.com/ws-activestirling/production/Badminton/_1200x630_crop_center-center_none/Badminton-3.jpg",
       "categoryIds": [
         1,
@@ -59,22 +59,48 @@
         2
       ],
       "location": "The Park",
-      "startTime": "2023-03-15T12:00:00.000Z",
-      "endTime": "2023-03-15T13:30:00.000Z"
+      "startTime": "2023-08-15T15:00",
+      "endTime": "2023-08-15T17:30"
     },
     {
       "id": 4,
       "createdBy": 2,
       "title": "Yoga",
-      "description": "It's a bit of a stretch.",
+      "description": "It's a bit of a stretch. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?",
       "image": "https://ymcasouthflorida.org/wp-content/uploads/2019/12/AA2I8910-scaled.jpg",
+      "categoryIds": "2",
+      "attendedBy": [],
+      "location": "Shavasana Yoga School",
+      "startTime": "2023-06-19T10:00",
+      "endTime": "2023-06-19T11:15"
+    },
+    {
+      "title": "Summer Party",
+      "description": "Let's celebrate summer time! At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.",
+      "image": "https://images.pexels.com/photos/4279121/pexels-photo-4279121.jpeg",
       "categoryIds": [
+        3,
         1
       ],
       "attendedBy": [],
-      "location": "Shavasana Yoga School",
-      "startTime": "2023-03-09T06:00:00.000Z",
-      "endTime": "2023-03-09T07:00:00.000Z"
+      "location": "Fort Greene Park",
+      "startTime": "2023-06-21T18:00",
+      "endTime": "2023-06-21T23:00",
+      "id": 5
+    },
+    {
+      "title": "Mia's Birthday Party",
+      "description": "Happy Birthday to you! Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?",
+      "image": "https://images.pexels.com/photos/10033205/pexels-photo-10033205.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "categoryIds": [
+        1,
+        3
+      ],
+      "attendedBy": [],
+      "location": "Mia's house",
+      "startTime": "2023-07-26T18:00",
+      "endTime": "2023-07-26T23:00",
+      "id": 6
     }
   ],
   "categories": [
