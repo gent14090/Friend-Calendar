@@ -13,6 +13,17 @@ import { CalendarIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 
 const EventListItem = ({ event, categories }) => {
+  const formatDate = (dateString) => {
+    const options = {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    };
+    return new Date(dateString).toLocaleString("en-GB", options);
+  };
+
   return (
     <Box maxW={1600} display={"inline-flex"}>
       <Box
@@ -50,8 +61,7 @@ const EventListItem = ({ event, categories }) => {
           {/* Starttijd en eindtijd */}
           <Text color={"gray.700"} fontSize={"1rem"} my={2}>
             <Link to={`/event/${event.id}`} style={{ textDecoration: "none" }}>
-              🗓️ {new Date(event.startTime).toLocaleString()} {"- "}
-              {new Date(event.endTime).toLocaleString()}
+              🗓️ {formatDate(event.startTime)} - {formatDate(event.endTime)}
             </Link>
           </Text>
 

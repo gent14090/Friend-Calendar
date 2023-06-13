@@ -17,6 +17,7 @@ const EditEventForm = ({
 }) => {
   return (
     <form onSubmit={handleSubmit}>
+      {/* Event naam veranderen */}
       <FormControl id="title" isRequired>
         <FormLabel>Event name</FormLabel>
         <Input
@@ -27,6 +28,7 @@ const EditEventForm = ({
         />
       </FormControl>
 
+      {/* Event locatie veranderen */}
       <FormControl id="location" mt={4}>
         <FormLabel>Location</FormLabel>
         <Input
@@ -37,6 +39,7 @@ const EditEventForm = ({
         />
       </FormControl>
 
+      {/* Event omschrijving veranderen */}
       <FormControl id="description" isRequired mt={4}>
         <FormLabel>Description</FormLabel>
         <Textarea
@@ -46,6 +49,7 @@ const EditEventForm = ({
         />
       </FormControl>
 
+      {/* Startdatum en -tijd veranderen */}
       <FormControl id="startTime" isRequired mt={4}>
         <FormLabel>Starts at:</FormLabel>
         <Input
@@ -56,6 +60,7 @@ const EditEventForm = ({
         />
       </FormControl>
 
+      {/* Einddatum en -tijd veranderen */}
       <FormControl id="endTime" mt={4}>
         <FormLabel>Ends at:</FormLabel>
         <Input
@@ -66,6 +71,7 @@ const EditEventForm = ({
         />
       </FormControl>
 
+      {/* Event type veranderen (categorieen) */}
       <FormControl id="categoryIds" mt={4}>
         <FormLabel>Event type</FormLabel>
         {categories.map((category) => (
@@ -80,8 +86,9 @@ const EditEventForm = ({
         ))}
       </FormControl>
 
+      {/* Veranderingen opslaan */}
       <Button type="submit" colorScheme="green" my={4}>
-        Save
+        Save changes
       </Button>
     </form>
   );

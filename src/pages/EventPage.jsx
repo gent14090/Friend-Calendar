@@ -49,6 +49,17 @@ export const EventPage = () => {
   const toast = useToast();
   const navigate = useNavigate();
 
+  const formatDate = (dateString) => {
+    const options = {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    };
+    return new Date(dateString).toLocaleString("en-GB", options);
+  };
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUpdatedEvent((prevState) => ({
@@ -220,8 +231,8 @@ export const EventPage = () => {
 
           {/* Begintijd en eindtijd */}
           <Text color={"gray.700"} fontSize={"1rem"} my={"2"} mx={"4"}>
-            🗓️ {new Date(event.startTime).toLocaleString()} {"– "}
-            {new Date(event.endTime).toLocaleString()}
+            🗓️ {formatDate(event.startTime)} {"– "}
+            {formatDate(event.endTime)}
           </Text>
 
           {/* Omschrijving */}

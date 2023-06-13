@@ -75,6 +75,7 @@ export const AddEvent = () => {
       .then((data) => console.log(data))
       .catch((error) => console.log(error));
 
+    // Event succesvol toegevoegd
     toast({
       title: "Event Added Successfully.",
       status: "success",
@@ -90,6 +91,7 @@ export const AddEvent = () => {
     reset();
   };
 
+  // Checkboxes, een of meerdere categorieen (event types)
   const handleCheckboxChange = (event) => {
     const { value, checked } = event.target;
     if (checked) {
@@ -99,6 +101,7 @@ export const AddEvent = () => {
     }
   };
 
+  // Event toevoegen CTA
   return (
     <Box p={"6"}>
       <Center>
@@ -126,12 +129,14 @@ export const AddEvent = () => {
       </Center>
       <Divider my={8}></Divider>
 
+      {/* Event toevoegen formulier */}
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Add Event</ModalHeader>
           <ModalBody>
             <form onSubmit={handleSubmit}>
+              {/* Afbeelding */}
               <FormControl>
                 <FormLabel>Image</FormLabel>
                 <Input
@@ -141,8 +146,10 @@ export const AddEvent = () => {
                   onChange={(event) => setImage(event.target.value)}
                 />
               </FormControl>
+
+              {/* Event naam */}
               <FormControl>
-                <FormLabel>Title</FormLabel>
+                <FormLabel>Event name</FormLabel>
                 <Input
                   type="text"
                   value={title}
@@ -150,6 +157,8 @@ export const AddEvent = () => {
                   onChange={(event) => setTitle(event.target.value)}
                 />
               </FormControl>
+
+              {/* Locatie */}
               <FormControl mt={4}>
                 <FormLabel>Location</FormLabel>
                 <Input
@@ -159,6 +168,8 @@ export const AddEvent = () => {
                   onChange={(event) => setLocation(event.target.value)}
                 />
               </FormControl>
+
+              {/* Omschrijving event */}
               <FormControl mt={4}>
                 <FormLabel>Description</FormLabel>
                 <Textarea
@@ -167,22 +178,28 @@ export const AddEvent = () => {
                   onChange={(event) => setDescription(event.target.value)}
                 />
               </FormControl>
+
+              {/* Startdatum en -tijd */}
               <FormControl mt={4}>
-                <FormLabel>Start Time</FormLabel>
+                <FormLabel>Starts at:</FormLabel>
                 <Input
                   type="datetime-local"
                   value={startTime}
                   onChange={(event) => setStartTime(event.target.value)}
                 />
               </FormControl>
+
+              {/* Einddatum en -tijd */}
               <FormControl mt={4}>
-                <FormLabel>End Time</FormLabel>
+                <FormLabel>Ends at:</FormLabel>
                 <Input
                   type="datetime-local"
                   value={endTime}
                   onChange={(event) => setEndTime(event.target.value)}
                 />
               </FormControl>
+
+              {/* Event types (categorieen) */}
               <FormControl mt={4}>
                 <FormLabel>Event type</FormLabel>
                 {categories.map((category) => (
@@ -196,19 +213,23 @@ export const AddEvent = () => {
                   </Checkbox>
                 ))}
               </FormControl>
+
+              {/* Nieuwe event opslaan */}
               <Button
                 variant="outline"
                 mt={8}
                 type="submit"
-                _hover={{ bg: "limegreen", color: "white" }}
+                _hover={{ bg: "green.500", color: "white" }}
               >
-                Save
+                Save new event
               </Button>
+
+              {/* Annuleren */}
               <Button
                 variant="outline"
                 ml={4}
                 mt={8}
-                _hover={{ bg: "red", color: "white" }}
+                _hover={{ bg: "red.500", color: "white" }}
                 onClick={() => {
                   onClose();
                   reset();
