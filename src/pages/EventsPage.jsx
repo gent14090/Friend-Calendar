@@ -40,6 +40,7 @@ const EventsPage = () => {
     setSelectedCategory(value);
   };
 
+  // Filter voor event types
   const filteredEvents = events
     .filter((event) => event.title.toLowerCase().includes(search.toLowerCase()))
     .filter((event) => {
@@ -61,7 +62,7 @@ const EventsPage = () => {
             onChange={handleChange}
           />
 
-          {/* Filters */}
+          {/* Filters (opmaak) */}
           <RadioGroup
             padding={"4"}
             marginBottom={"6"}

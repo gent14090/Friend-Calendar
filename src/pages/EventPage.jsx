@@ -83,6 +83,7 @@ export const EventPage = () => {
     }
   };
 
+  // Aanpassen event succesvol of gefaald
   const handleEditSubmit = (event) => {
     event.preventDefault();
     fetch(`http://localhost:3000/events/${updatedEvent.id}`, {
@@ -96,7 +97,7 @@ export const EventPage = () => {
       .then((data) => {
         console.log("Success:", data);
         toast({
-          title: "Event Edited Successfully.",
+          title: "Event edited successfully.",
           status: "success",
           duration: 3000,
           position: "top-right",
@@ -124,6 +125,7 @@ export const EventPage = () => {
     setIsEditModalOpen(false);
   };
 
+  // Event verwijderen, bevestigen en succes of error bericht
   const handleDeleteClick = () => {
     if (window.confirm("Do you want to delete this event?")) {
       window.confirm("Are you sure?");
@@ -153,6 +155,7 @@ export const EventPage = () => {
     }
   };
 
+  // Terug naar homepage (voor go back knop)
   const handleGoBack = () => {
     navigate("/");
   };
@@ -166,7 +169,7 @@ export const EventPage = () => {
         flexDirection={"column"}
         my={"6"}
       >
-        {/* Go Back knop */}
+        {/* Go back knop */}
         <Button
           leftIcon={<ArrowBackIcon />}
           color={"gray.500"}
@@ -201,7 +204,7 @@ export const EventPage = () => {
             {event.title}
           </Heading>
 
-          {/* Categorie */}
+          {/* Event type */}
           <Flex gap={2} my={"2"} ml={"4"}>
             {categories
               .filter((category) => event.categoryIds.includes(category.id))
